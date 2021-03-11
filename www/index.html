@@ -1,49 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-
-
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://code.jquery.com fonts.gstatic.com data: gap: https://ssl.gstatic.com https://musicbrainz.org 'unsafe-eval'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-      <meta name="format-detection" content="telephone=no">
-      <meta name="msapplication-tap-highlight" content="no">
-       
-
-
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>App matricula</title>
-
-  <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<title>Login</title>
+	<meta charset="UTF-8">
+  	<meta name="format-detection" content="telephone=no">
+  	<meta name="msapplication-tap-highlight" content="no">
+  	<meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+  	<meta name="color-scheme" content="light dark">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
 </head>
-    <body>
-      <nav class=" lighten-1" role="navigation" >
-        <div id="bigdiv" class="center black " >
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form">
+					<span class="login100-form-title p-b-26">
+						Matricula't al IETI!
+					</span>
+					<span class="login100-form-title p-b-48">
+						<i class="zmdi zmdi-font"></i>
+					</span>
 
-          <a id="logo-container" href="#" ckass="brand-logo "><b>APP Matricula</b></a>
-          <ul id="tabs" class="tabs">
-            <li class="tab col s4"><a class="active black-text" href="#test-swipe-1"><b>Dashboard</b></a></li>
-            <li class="tab col s4"><a class="black-text" href="#test-swipe-2"><b>Requeriments</b></a></li>
-            <li class="tab col s4"><a class="black-text" href="#test-swipe-3"><b>UFs</b></a></li>
-            <li class="tab col s4"><a class="black-text" href="#test-swipe-4"><b>Dades personals</b></a></li>
-          </ul>
-          <div id="test-swipe-1" class="col s12 white black-text">Dashboard</div>
-          <div id="test-swipe-2" class="col s12 white black-text">Requeriments</div>
-          <div id="test-swipe-3" class="col s12 white black-text">UFs</div>
-          <div id="test-swipe-4" class="col s12 white black-text">Dades personals</div>
-      </nav>
-    </body>
-  </footer>
+					<div class="wrap-input100 validate-input">
+						<input id="itUsername" class="input100" type="text" name="username">
+						<span class="focus-input100" data-placeholder="DNI/NIE/Pasaport"></span>
+					</div>
 
+					<div class="wrap-input100 validate-input">
+						<input id="itPassword" class="input100" type="password" name="password">
+						<span class="focus-input100" data-placeholder="Contrasenya"></span>
+					</div>
 
-  <!--  Scripts-->
-  <script src="cordova.js"></script>
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
- 
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button id="btnLogin" type="button" class="login100-form-btn">
+								ENTRA!
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
-  
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.12.0/js/md5.min.js"></script>
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+	<script src="js/main.js"></script>
+
+</body>
 </html>
