@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 	<title>Login</title>
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:5000 https://code.jquery.com fonts.gstatic.com data: gap: https://cdnjs.cloudflare.com https://ssl.gstatic.com https://g3matriculesapp.herokuapp.com 'unsafe-eval'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
 	<meta charset="UTF-8">
   	<meta name="format-detection" content="telephone=no">
   	<meta name="msapplication-tap-highlight" content="no">
@@ -44,12 +45,12 @@
 					</span>
 
 					<div class="wrap-input100 validate-input">
-						<input id="itUsername" class="input100" type="text" name="username">
-						<span class="focus-input100" data-placeholder="DNI/NIE/Pasaport"></span>
+						<input id="itEmail" class="input100" type="email" name="itEmail">
+						<span class="focus-input100" data-placeholder="Email"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input">
-						<input id="itPassword" class="input100" type="password" name="password">
+						<input id="itPassword" class="input100" type="password" name="itPassword">
 						<span class="focus-input100" data-placeholder="Contrasenya"></span>
 					</div>
 
