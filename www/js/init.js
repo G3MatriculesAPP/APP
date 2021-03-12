@@ -4,7 +4,27 @@
   // Or with jQuery
 
    
+  $.ajax({
+    method: "GET",
+    // url: "http://localhost:5000/api/auth",               // [DEBUG] - Para pruebas LOCALHOST
+    url: "https://g3matriculesapp.herokuapp.com/api/auth",  // [DEBUG] - Para pruebas con HERKOU
+    datatype: "json",
+    data: ({
+      
+      token : localStorage.getItem("TOKEN")
+    }),
+    success: function(result){
+      if(result){
+        
+      }
 
+    },
+    error: function(result){
+   //   window.location = 'index.html'   
+      alert('La sesion ha caducado')
+    }
+  });
+  
   (function($){
     $(function(){
    
