@@ -1,33 +1,22 @@
-// Arxiu init.js + index.js
-
-
-  // Or with jQuery
-
-   
-  $.ajax({
+$.ajax({
     method: "GET",
-    // url: "http://localhost:5000/api/auth",               // [DEBUG] - Para pruebas LOCALHOST
-    url: "https://g3matriculesapp.herokuapp.com/api/auth",  // [DEBUG] - Para pruebas con HERKOU
+    url: "http://localhost:5000/api/auth",                      // [DEBUG] - Para pruebas LOCALHOST
+    // url: "https://g3matriculesapp.herokuapp.com/api/auth",   // [DEBUG] - Para pruebas con HERKOU
     datatype: "json",
-    data: ({
-      
+    headers: ({
       token : localStorage.getItem("TOKEN")
     }),
     success: function(result){
-      if(result){
-        
-      }
-
+      alert(result.message)
     },
     error: function(result){
-   //   window.location = 'index.html'   
-      alert('La sesion ha caducado')
+      alert("No tienes acceso")
+      window.location = 'index.html'   
     }
-  });
+});
   
   (function($){
     $(function(){
-   
   
     var options = { "swipeable": true };
     var el = document.getElementById('tabs');
