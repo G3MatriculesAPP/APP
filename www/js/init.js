@@ -1,7 +1,7 @@
 $.ajax({
     method: "GET",
-    url: "http://localhost:5000/api/auth",                      // [DEBUG] - Para pruebas LOCALHOST
-    // url: "https://g3matriculesapp.herokuapp.com/api/auth",   // [DEBUG] - Para pruebas con HERKOU
+    // url: "http://localhost:5000/api/auth",                      // [DEBUG] - Para pruebas LOCALHOST
+    url: "https://g3matriculesapp.herokuapp.com/api/auth",   // [DEBUG] - Para pruebas con HERKOU
     datatype: "json",
     headers: ({
       token : localStorage.getItem("TOKEN")
