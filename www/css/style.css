@@ -12,3 +12,16 @@
 .icon-block .material-icons {
 	font-size: inherit;
 }
+
+#semaforo1 {
+  width: 80%;
+  height: 35px;
+  margin-left:10%;
+  margin-right:10%;
+}
+#semaforo2 {
+  width: 80%;
+  height: 35px;
+  margin-left:10%;
+  margin-right:10%;
+}
