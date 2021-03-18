@@ -36,19 +36,23 @@ $.ajax({
   
   var semaforo1 = document.getElementById("semaforo1");
   var semaforo2 = document.getElementById("semaforo2");
+  
   function VRed(){    
     semaforo1.style.backgroundColor="#D50000";
+    document.getElementById("tsemaforo").innerHTML = "Datos incompletos";
     semaforo2.style.backgroundColor="#D50000";
   
   }
 
   function VYellow(){
     semaforo1.style.backgroundColor="#EDB000";
+    document.getElementById("tsemaforo").innerHTML = "Datos por verificar";
     semaforo2.style.backgroundColor="#EDB000";
   }
 
   function VGreen(){
     semaforo1.style.backgroundColor="green";
+    document.getElementById("tsemaforo").innerHTML = "Datos aceptados";
     semaforo2.style.backgroundColor="green";
 
   }
