@@ -64,13 +64,54 @@ $.ajax({
       document.getElementById("dIncompletos").onclick = VRed;
       document.getElementById("dPorValidar").onclick = VYellow;
       document.getElementById("dAceptados").onclick = VGreen;
-
+      datosP();
+      modulos();
       
 
       
   }
 
-  
+  function modulos(){
+    
+    $("#acurso1").empty();
+    $("#acurso2").empty();
+    $.ajax({
+        /*method: "GET",
+        
+        dataType: "json",*/
+       }).done(function (msg) {
+        for(var item in msg.artists) {
+          
+          $("#curso1").append('<button class="accordion"><form action="#"><p><label class="black-text"> <input type="checkbox" /> <span>M01</span> </label> </p> </form> </button>')
+
+         
+        };
+      }).fail(function () {
+          alert("ERROR");
+      });
+}
+
+function datosP(){
+    
+ // $("#datosPersonales").empty();
+ 
+  $.ajax({
+      /*method: "GET",
+      
+      dataType: "json",*/
+     }).done(function (msg) {
+      for(var item in msg.artists) {
+
+        $("#curso1").append('<option value="1">Option 1</option>')
+
+       
+      };
+    }).fail(function () {
+        alert("ERROR");
+    });
+}
+
+
 var acc = document.getElementsByClassName("accordion");
 var i;
 
@@ -89,3 +130,14 @@ for (i = 0; i < acc.length; i++) {
     }
   });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('select');
+  var instances = M.FormSelect.init(elems, options);
+});
+
+// Or with jQuery
+
+$(document).ready(function(){
+  $('select').formSelect();
+});
