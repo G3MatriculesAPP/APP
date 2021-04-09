@@ -57,6 +57,25 @@ $.ajax({
 
   }
 
+  
+  // carregar les dades necesaries per al perfil seleccionat
+  function carregarPerfil(){
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('select');
+      var instance = M.FormSelect.getInstance(elems);
+      
+      var seleccionado = instance.getSelectedValues();
+      console.log("Holaaaaaaaaaaaa1");
+    });
+    
+    console.log("Holaaaaaaaaaaaa2");
+    console.log(seleccionado);
+    
+    
+  }
+
+
   function onDeviceReady() {
       // Cordova is now initialized. Have fun!
   
@@ -64,54 +83,70 @@ $.ajax({
       document.getElementById("dIncompletos").onclick = VRed;
       document.getElementById("dPorValidar").onclick = VYellow;
       document.getElementById("dAceptados").onclick = VGreen;
+      document.getElementById("cPerf").onclick = carregarPerfil;
       datosP();
       modulos();
       
 
       
   }
-
+//  $("#curso1").append('<button class="accordion"><form action="#"><p><label class="black-text"> <input type="checkbox" /> <span>M01</span> </label> </p> </form> </button>')
   function modulos(){
     
     $("#acurso1").empty();
     $("#acurso2").empty();
-    $.ajax({
-        /*method: "GET",
-        
-        dataType: "json",*/
-       }).done(function (msg) {
-        for(var item in msg.artists) {
-          
-          $("#curso1").append('<button class="accordion"><form action="#"><p><label class="black-text"> <input type="checkbox" /> <span>M01</span> </label> </p> </form> </button>')
-
-         
-        };
-      }).fail(function () {
-          alert("ERROR");
-      });
+   
 }
+
+
 
 function datosP(){
     
- // $("#datosPersonales").empty();
  
-  $.ajax({
-      /*method: "GET",
+ 
+ $.ajax({
+  method: "GET",
+  // url: "http://localhost:5000/alum/login",               // [DEBUG] - Para pruebas LOCALHOST
+  url: "https://g3matriculesapp.herokuapp.com/api/reqPerfils/readAll",  // [DEBUG] - Para pruebas con HERKOU
+  datatype: "json",
+  
+  success: function(result){
+    if(result){
+     
+
+      for(i=0; i<result.data.length;i++){
+        console.log("hola "+ result.data.length);
+        var perfil = JSON.stringify(result.data[i].nom);
+        console.log('<option value="'+(i+1)+'">'+perfil+'</option>');
+        $("#datosPersonales").append('<option value="'+(i+1)+'">'+perfil+'</option>');
+      }
+
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems, options);
+      });
       
-      dataType: "json",*/
-     }).done(function (msg) {
-      for(var item in msg.artists) {
+      // Or with jQuery
+      
+      $(document).ready(function(){
+        $('select').formSelect();
+      });
+      
+     
+    }
+    
 
-        $("#curso1").append('<option value="1">Option 1</option>')
-
-       
-      };
-    }).fail(function () {
-        alert("ERROR");
-    });
+  },
+  error: function(result){
+    alert('Usuario/Contraseña incorrecta...')
+  }
+});
 }
 
 
+
+//   Sistema de acordeon con botones
 var acc = document.getElementsByClassName("accordion");
 var i;
 
@@ -131,13 +166,4 @@ for (i = 0; i < acc.length; i++) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  var elems = document.querySelectorAll('select');
-  var instances = M.FormSelect.init(elems, options);
-});
 
-// Or with jQuery
-
-$(document).ready(function(){
-  $('select').formSelect();
-});
