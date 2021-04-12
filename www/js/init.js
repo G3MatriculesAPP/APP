@@ -57,6 +57,18 @@ $.ajax({
 
   }
 
+  
+  // carregar les dades necesaries per al perfil seleccionat
+  function carregarPerfil(){
+
+    var elem = document.getElementById("datosPersonales");
+    var instance = M.FormSelect.getInstance(elem);
+    
+    console.log(instance.getSelectedValues());
+    
+  }
+
+
   function onDeviceReady() {
       // Cordova is now initialized. Have fun!
   
@@ -64,7 +76,88 @@ $.ajax({
       document.getElementById("dIncompletos").onclick = VRed;
       document.getElementById("dPorValidar").onclick = VYellow;
       document.getElementById("dAceptados").onclick = VGreen;
-      //document.getElementById('deviceready').classList.add('ready');
+      document.getElementById("cPerf").onclick = carregarPerfil;
+      datosP();
+      modulos();
+      
+
+      
   }
+//  $("#curso1").append('<button class="accordion"><form action="#"><p><label class="black-text"> <input type="checkbox" /> <span>M01</span> </label> </p> </form> </button>')
+  function modulos(){
+    
+    $("#acurso1").empty();
+    $("#acurso2").empty();
+   
+}
+
+
+
+function datosP(){
+    
+ 
+ 
+ $.ajax({
+  method: "GET",
+  // url: "http://localhost:5000/alum/login",               // [DEBUG] - Para pruebas LOCALHOST
+  url: "https://g3matriculesapp.herokuapp.com/api/reqPerfils/readAll",  // [DEBUG] - Para pruebas con HERKOU
+  datatype: "json",
   
-  
+  success: function(result){
+    if(result){
+     
+
+      for(i=0; i<result.data.length;i++){
+        console.log("hola "+ result.data.length);
+        var perfil = JSON.stringify(result.data[i].nom);
+        var codigos = JSON.stringify(result.data[i]._id);
+        console.log('<option value='+codigos+'>'+perfil+'</option>');
+        $("#datosPersonales").append('<option value="'+codigos+'">'+perfil+'</option>');
+      }
+
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems, options);
+      });
+      
+      // Or with jQuery
+      
+      $(document).ready(function(){
+        $('select').formSelect();
+      });
+      
+     
+    }
+    
+
+  },
+  error: function(result){
+    alert('Usuario/Contraseña incorrecta...')
+  }
+});
+}
+
+
+
+//   Sistema de acordeon con botones
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    /* Toggle between adding and removing the "active" class,
+    to highlight the button that controls the panel */
+    this.classList.toggle("active");
+
+    /* Toggle between hiding and showing the active panel */
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+
+
