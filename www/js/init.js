@@ -1,7 +1,7 @@
 $.ajax({
     method: "GET",
     // url: "http://localhost:5000/api/auth",                      // [DEBUG] - Para pruebas LOCALHOST
-    url: "https://g3matriculesapp.herokuapp.com/api/auth",   // [DEBUG] - Para pruebas con HERKOU
+    url: "https://g3matriculesapp.herokuapp.com/api/auth",          // [DEBUG] - Para pruebas con HERKOU
     datatype: "json",
     headers: ({
       token : localStorage.getItem("TOKEN")
@@ -65,6 +65,7 @@ $.ajax({
     var instance = M.FormSelect.getInstance(elem);
     
     console.log(instance.getSelectedValues());
+    console.log
     
   }
 
@@ -91,6 +92,11 @@ $.ajax({
    
 }
 
+
+$("#datosPersonales").change(function(){
+  var selectedCountry = $(this).children("option:selected").val();
+        alert("You have selected the country - " + selectedCountry);
+})
 
 
 function datosP(){
