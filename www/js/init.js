@@ -58,16 +58,8 @@ $.ajax({
   }
 
   
-  // carregar les dades necesaries per al perfil seleccionat
-  function carregarPerfil(){
-
-    var elem = document.getElementById("datosPersonales");
-    var instance = M.FormSelect.getInstance(elem);
-    
-    console.log(instance.getSelectedValues());
-    console.log
-    
-  }
+  
+ 
 
 
   function onDeviceReady() {
@@ -77,7 +69,7 @@ $.ajax({
       document.getElementById("dIncompletos").onclick = VRed;
       document.getElementById("dPorValidar").onclick = VYellow;
       document.getElementById("dAceptados").onclick = VGreen;
-      document.getElementById("cPerf").onclick = carregarPerfil;
+      
       datosP();
       modulos();
       
@@ -92,10 +84,43 @@ $.ajax({
    
 }
 
-
+// carregar les dades necesaries per al perfil seleccionat
 $("#datosPersonales").change(function(){
   var selectedCountry = $(this).children("option:selected").val();
-        alert("You have selected the country - " + selectedCountry);
+  alert("You have selected the country - " + selectedCountry);
+  
+  var id = selectedCountry.split('"');
+  console.log(id[1]);
+  $.ajax({
+    method: "POST",
+    // url: "http://localhost:5000/alum/login",               // [DEBUG] - Para pruebas LOCALHOST
+    url: "https://g3matriculesapp.herokuapp.com/api/reqPerfils/readOne",  // [DEBUG] - Para pruebas con HERKOU
+    datatype: "json",
+    data: ({
+      id: id[1]
+    }),
+    success: function(result){
+      if(result){
+        $("#buttons").html("");
+        for(i=0; i<result.data.length;i++){
+          if(result.data[i].tipusReq == 0){
+            $("#buttons").append('<label for="file'+i+'">'+result.data[i].nomReq+'</label><input type="file" id="file'+i+'" name="fileImage'+i+'" accept="image/png, image/jpeg, image/jpg"><br/>');    
+           
+          }
+          else if(result.data[i].tipusReq == 1){
+            $("#buttons").append('<label for="file'+i+'">'+result.data[i].nomReq+'</label><input type="file" id="file'+i+'" name="fileDoc'+i+'" accept=".pdf"><br/>');    
+           
+          }
+          else if(result.data[i].tipusReq == 2){
+            $("#buttons").append('<label for="file'+i+'">'+result.data[i].nomReq+'</label><input type="text" id="file'+i+'" name="fileDoc'+i+'" ><br/>');    
+           
+          }
+
+        }
+      }
+    }
+
+  })
 })
 
 
@@ -117,8 +142,8 @@ function datosP(){
         console.log("hola "+ result.data.length);
         var perfil = JSON.stringify(result.data[i].nom);
         var codigos = JSON.stringify(result.data[i]._id);
-        console.log('<option value='+codigos+'>'+perfil+'</option>');
-        $("#datosPersonales").append('<option value="'+codigos+'">'+perfil+'</option>');
+        
+        $('<option/>', { value : codigos}).text(perfil).appendTo('#datosPersonales');
       }
 
 
