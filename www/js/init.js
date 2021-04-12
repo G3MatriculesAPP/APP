@@ -60,18 +60,11 @@ $.ajax({
   
   // carregar les dades necesaries per al perfil seleccionat
   function carregarPerfil(){
+
+    var elem = document.getElementById("datosPersonales");
+    var instance = M.FormSelect.getInstance(elem);
     
-    document.addEventListener('DOMContentLoaded', function() {
-      var elems = document.querySelectorAll('select');
-      var instance = M.FormSelect.getInstance(elems);
-      
-      var seleccionado = instance.getSelectedValues();
-      console.log("Holaaaaaaaaaaaa1");
-    });
-    
-    console.log("Holaaaaaaaaaaaa2");
-    console.log(seleccionado);
-    
+    console.log(instance.getSelectedValues());
     
   }
 
@@ -117,8 +110,9 @@ function datosP(){
       for(i=0; i<result.data.length;i++){
         console.log("hola "+ result.data.length);
         var perfil = JSON.stringify(result.data[i].nom);
-        console.log('<option value="'+(i+1)+'">'+perfil+'</option>');
-        $("#datosPersonales").append('<option value="'+(i+1)+'">'+perfil+'</option>');
+        var codigos = JSON.stringify(result.data[i]._id);
+        console.log('<option value='+codigos+'>'+perfil+'</option>');
+        $("#datosPersonales").append('<option value="'+codigos+'">'+perfil+'</option>');
       }
 
 
