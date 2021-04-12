@@ -1,3 +1,4 @@
+var totalReq=0;
 $.ajax({
     method: "GET",
     // url: "http://localhost:5000/api/auth",                      // [DEBUG] - Para pruebas LOCALHOST
@@ -59,7 +60,41 @@ $.ajax({
 
   
   
- 
+  function subirFicheros(){
+    var comprobar =true;
+    for(i=0; i<totalReq; i++ ){
+      if ($("#file"+i).val().length === 0){
+        comprobar =false;
+      }
+    }
+    if (comprobar){
+      for(i=0; i<totalReq; i++ ){
+        
+        var dato_archivo = $("#file"+i).prop("files")[0];
+        var form_data = new FormData();
+        form_data.append("file", dato_archivo);
+        
+        $.ajax({
+          method: "POST",
+          // url: "http://localhost:5000/alum/login",               // [DEBUG] - Para pruebas LOCALHOST
+          url: "https://g3matriculesapp.herokuapp.com/api/reqPerfils/uploadReq",  // [DEBUG] - Para pruebas con HERKOU
+          datatype: "text",
+          processData: false,
+        
+          data: form_data,
+          success: function(result){
+            alert(result);
+          },
+         
+          error: function(result){
+            alert('Error: '+ result)
+          }
+        });
+      }
+    }else {
+      alert('Error: datos incompletos')
+    }
+  }
 
 
   function onDeviceReady() {
@@ -69,7 +104,7 @@ $.ajax({
       document.getElementById("dIncompletos").onclick = VRed;
       document.getElementById("dPorValidar").onclick = VYellow;
       document.getElementById("dAceptados").onclick = VGreen;
-      
+      document.getElementById("cPerf").onclick = subirFicheros;
       datosP();
       modulos();
       
@@ -87,7 +122,7 @@ $.ajax({
 // carregar les dades necesaries per al perfil seleccionat
 $("#datosPersonales").change(function(){
   var selectedCountry = $(this).children("option:selected").val();
-  alert("You have selected the country - " + selectedCountry);
+  //alert("You have selected the country - " + selectedCountry);
   
   var id = selectedCountry.split('"');
   console.log(id[1]);
@@ -102,6 +137,7 @@ $("#datosPersonales").change(function(){
     success: function(result){
       if(result){
         $("#buttons").html("");
+        totalReq = result.data.length;
         for(i=0; i<result.data.length;i++){
           if(result.data[i].tipusReq == 0){
             $("#buttons").append('<label for="file'+i+'">'+result.data[i].nomReq+'</label><input type="file" id="file'+i+'" name="fileImage'+i+'" accept="image/png, image/jpeg, image/jpg"><br/>');    
@@ -115,8 +151,8 @@ $("#datosPersonales").change(function(){
             $("#buttons").append('<label for="file'+i+'">'+result.data[i].nomReq+'</label><input type="text" id="file'+i+'" name="fileDoc'+i+'" ><br/>');    
            
           }
-
         }
+        $("#cPerf").css("visibility","visible");
       }
     }
 
@@ -136,7 +172,7 @@ function datosP(){
   
   success: function(result){
     if(result){
-     
+      
 
       for(i=0; i<result.data.length;i++){
         console.log("hola "+ result.data.length);
