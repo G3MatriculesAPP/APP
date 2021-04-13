@@ -1,6 +1,8 @@
 var totalReq=0;
 var copyResult;
 var arrayUF=[];
+
+
 $.ajax({
     method: "GET",
     // url: "http://localhost:5000/api/auth",                      // [DEBUG] - Para pruebas LOCALHOST
@@ -101,7 +103,12 @@ $.ajax({
 
   function onDeviceReady() {
       // Cordova is now initialized. Have fun!
-  
+      $(document).ready(function() {
+        
+        $(".carousel")[0].style = "height: 100vh;";
+        
+    });
+
       console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
       document.getElementById("dIncompletos").onclick = VRed;
       document.getElementById("dPorValidar").onclick = VYellow;
