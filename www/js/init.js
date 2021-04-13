@@ -1,4 +1,6 @@
 var totalReq=0;
+var copyResult;
+var arrayUF=[];
 $.ajax({
     method: "GET",
     // url: "http://localhost:5000/api/auth",                      // [DEBUG] - Para pruebas LOCALHOST
@@ -105,6 +107,7 @@ $.ajax({
       document.getElementById("dPorValidar").onclick = VYellow;
       document.getElementById("dAceptados").onclick = VGreen;
       document.getElementById("cPerf").onclick = subirFicheros;
+      document.getElementById("bGuardar").onclick = guardarUFs;
       obtenerCiclo();
       datosP();
       modulos();
@@ -210,13 +213,6 @@ function datosP(){
 
 //   Sistema de acordeon con botones
 
-function marcarTodo(i, result){
-  console.log("indice= "+i)
-  for(j=0; j<result.data.moduls[i].unitatsFormatives.length; j++){
-    $('#uf'+i+'.'+j).prop('checked', true);
-  }
-}
-
 function obtenerCiclo(){
   $.ajax({
     method: "POST",
@@ -227,47 +223,94 @@ function obtenerCiclo(){
     }),
     success: function(result){
       
+      copyResult = result;
       $("#nomCicle").text(result.data.nom);
       
-      for(i=0; i<result.data.moduls.length;i++){ //  <button id="'+result.data.moduls[i].codiModul+'" > '+result.data.moduls[i].nomModul+' </button>
-        $("#modulos").append('<button class="accordion"> <form action="#"> <p> <a  id="selectAll'+i+'" class="waves-effect waves-light  btn">'+result.data.moduls[i].nomModul+'</a> </p> </form> </button> <div class="panel" id="modul'+i+'"> </div>');
-       
-
-        for(j=0; j<result.data.moduls[i].unitatsFormatives.length; j++){
-          
-       
-          $('#modul'+i).append('<button class="accordion"> <form action="#"> <p> <label class="black-text"> <input id="uf'+i+'.'+j+'" type="checkbox" /> <span>'+result.data.moduls[i].unitatsFormatives[j].nomUnitatFormativa+'</span> </label> </p> </form> </button> <div class="panel" id="uf'+i+'.'+j+'"> </div>')
+      for(i=0; i<result.data.moduls.length;i++){ 
+        $("#modulos").append('<button class="accordion"> <form action="#"> <p> <label class="black-text"> <input id="chk_modul-'+i+'" type="checkbox" /> <span>'+result.data.moduls[i].nomModul+'</span> </label> </p> </form> </button> <div class="panel" id="modul'+i+'"> </div>');
+        
+        countUF = result.data.moduls[i].unitatsFormatives.length;
+        for(j=0; j< countUF ; j++){
+          $('#modul'+i).append('<button class="accordion"> <form action="#"> <p> <label class="black-text"> <input id="chk_uf-'+i+'.'+j+'" type="checkbox" /> <span>'+result.data.moduls[i].unitatsFormatives[j].nomUnitatFormativa+'</span> </label> </p> </form> </button> <div class="panel" id="uf'+i+'.'+j+'"> </div>')
         }
-        document.getElementById("selectAll"+i).onclick = marcarTodo(i, result)
-       // $('#selectAll'+i).click(marcarTodo(i, result));
+        
+        
+        $("#chk_modul-"+i).click({result: result}, function(){
+          var pos = jQuery(this).attr("id");
+          var modulCheckbox = document.getElementById(pos);
+          pos = pos.split("-")[1]
+          var countUF = result.data.moduls[pos].unitatsFormatives.length;
+
+          if(modulCheckbox.checked == true){
+            for(y=0; y<countUF; y++){
+              document.getElementById("chk_uf-"+pos+"."+y).checked = true;
+            }
+          }else{
+            for(y=0; y<countUF; y++){
+              document.getElementById("chk_uf-"+pos+"."+y).checked = false;
+            }
+          }
+
           
-       
-     
+        })
+
       }
 
       var acc = document.getElementsByClassName("accordion");
-      var i;
+      var x;
 
-      for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function() {
-      /* Toggle between adding and removing the "active" class,
-      to highlight the button that controls the panel */
-      this.classList.toggle("active");
+      for (x = 0; x < acc.length; x++) {
+        acc[x].addEventListener("click", function() {
+        /* Toggle between adding and removing the "active" class,
+        to highlight the button that controls the panel */
+        this.classList.toggle("active");
 
-      /* Toggle between hiding and showing the active panel */
-      var panel = this.nextElementSibling;
-      if (panel.style.display === "block") {
-        panel.style.display = "none";
-      } else {
-        panel.style.display = "block";
-      }
-      
-    });
-}
+        /* Toggle between hiding and showing the active panel */
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
+    }
 
     },
     error: function(result){
-      alert('Usuario/Contraseña incorrecta...')
+      alert('Usuario/ContraseÃ±a incorrecta...')
+    }
+  });
+}
+
+function guardarUFs(){
+  for(k=0; k<copyResult.data.moduls.length; k++){
+    for(x=0; x<copyResult.data.moduls[k].unitatsFormatives.length; x++){
+      var chk = document.getElementById("chk_uf-"+k+"."+x);
+      if (chk.checked){
+        arrayUF.push("1");
+      }else {
+        arrayUF.push("0");
+      }
+      
+    }
+  }
+  console.log(arrayUF)
+  $.ajax({
+    method: "PATCH",
+    url: "https://g3matriculesapp.herokuapp.com/api/alumnes/updateUF",  // [DEBUG] - Para pruebas con HERKOU
+    datatype: "json",
+    data: ({
+      token: localStorage.getItem("TOKEN"),
+      data: JSON.stringify(arrayUF)
+    }),
+    success: function(result){
+      if(result){
+        alert(result.message)
+      }
+
+    },
+    error: function(result){
+      alert('Error...')
     }
   });
 }
