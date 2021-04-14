@@ -84,7 +84,7 @@ $.ajax({
 
         $.ajax({
           method: "POST",
-          url: "http://localhost:5000/api/uploadReq",                      // [DEBUG] - Para pruebas LOCALHOST
+          url: "https://g3matriculesapp.herokuapp.com/api/uploadReq",                      // [DEBUG] - Para pruebas LOCALHOST
           datatype: "json",
           data: ({
             token: localStorage.getItem("TOKEN"),
@@ -92,7 +92,7 @@ $.ajax({
             file: file64
           }),
           success: function(result){
-            console.log(result.message)
+            alert(result.message)
           },
           error: function(result){
             alert("Error...")
@@ -137,8 +137,7 @@ $.ajax({
     arrayUF = arrayCheckbox;
     $.ajax({
       method: "PATCH",
-      url: "http://localhost:5000/api/alumnes/updateUF",                      // [DEBUG] - Para pruebas LOCALHOST
-      // url: "https://g3matriculesapp.herokuapp.com/api/auth",          // [DEBUG] - Para pruebas con HERKOU
+      url: "https://g3matriculesapp.herokuapp.com/api/alumnes/updateUF",                      // [DEBUG] - Para pruebas LOCALHOST
       datatype: "json",
       data: ({
         token : localStorage.getItem("TOKEN"),
@@ -173,7 +172,6 @@ $("#datosPersonales").change(function(){
   console.log(id[1]);
   $.ajax({
     method: "POST",
-    // url: "http://localhost:5000/alum/login",               // [DEBUG] - Para pruebas LOCALHOST
     url: "https://g3matriculesapp.herokuapp.com/api/reqPerfils/readOne",  // [DEBUG] - Para pruebas con HERKOU
     datatype: "json",
     data: ({
