@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "android": "0.0.8",
-    "crypto-js": "^4.0.0"
+    "crypto-js": "^4.0.0",
+    "form-data": "^4.0.0"
   }
 }
