@@ -14,18 +14,34 @@
 }
 
 #semaforo1 {
-  width: 80%;
+  width: 31%;
   height: 35px;
-  margin-left:10%;
-  margin-right:10%;
+  margin-top:10px;
+  margin-left:35%;
+  
+  margin-bottom:10px;
 }
 #semaforo2 {
-  width: 80%;
+  width: 31%;
   height: 35px;
-  margin-left:10%;
-  margin-right:10%;
+  margin-left:35%;
+ 
+  margin-bottom:10px;
 }
-
+#semaforo3 {
+  width: 31%;
+  height: 35px;
+  margin-left:35%;
+ 
+  margin-bottom:10px;
+}
+#semaforo {
+  padding-top:5px;
+  height: 155px;
+  width: 25%;
+  margin-left:40%;
+  background-color: rgb(44, 44, 44);
+}
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion {
   background-color: #eee;
