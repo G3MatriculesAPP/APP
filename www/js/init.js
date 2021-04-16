@@ -144,6 +144,7 @@ $.ajax({
       obtenerCiclo();
       datosP();
       modulos();
+      userStatus();
        
   }
 
@@ -337,6 +338,33 @@ function obtenerCiclo(){
         }
       });
     }
+
+    },
+    error: function(result){
+      alert('Usuario/Contraseña incorrecta...')
+    }
+  });
+}
+
+
+function userStatus(){
+  $.ajax({
+    method: "POST",
+   
+    url: "https://g3matriculesapp.herokuapp.com/api/alumnes/status",  // [DEBUG] - Para pruebas con HERKOU
+    datatype: "json",
+    data: ({
+      token:localStorage.getItem("TOKEN")
+    }),
+    success: function(result){
+      console.log(result);
+      if(result.result== "Validada"){
+        VGreen();
+      }else if(result.result== "Per_validar"){
+        VYellow();
+      }else if(result.result== "Incomplet"){
+        VRed();
+      }
 
     },
     error: function(result){
