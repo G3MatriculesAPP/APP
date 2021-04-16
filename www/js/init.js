@@ -83,6 +83,28 @@ $.ajax({
   }
 
   async function subirFicheros(){
+    var perfil = $( "#datosPersonales option:selected" ).text()
+    var perfils = perfil.split('"')
+    $.ajax({
+      method: "POST",
+      
+      url: "https://g3matriculesapp.herokuapp.com/api/reqPerfils/updateAlumProfile",  // [DEBUG] - Para pruebas con HERKOU
+      datatype: "json",
+      data: ({
+        token: localStorage.getItem("TOKEN"),
+        nomPerfil: perfils[1],
+       
+      }),
+      success: function(result){
+        if(result){
+          alert(result)
+        }
+
+      },
+      error: function(result){
+        alert('Error')
+      }
+    });
     for(i=0; i<totalReq; i++ ){
       if ($("#file"+i).val().length !== 0){
         var myFile = $('#file'+i)[0].files[0];
