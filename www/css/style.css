@@ -21,6 +21,13 @@
   
   margin-bottom:10px;
 }
+.semaforo {
+  width: 30px;
+  height: 15px;
+  margin-left: 10%;
+  
+  
+}
 #semaforo2 {
   width: 31%;
   height: 35px;

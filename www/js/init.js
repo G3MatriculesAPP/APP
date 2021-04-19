@@ -143,6 +143,7 @@ $.ajax({
       document.getElementById("bGuardar").onclick = guardarUF;
       obtenerCiclo();
       datosP();
+      estadoPerfil();
       modulos();
       userStatus();
        
@@ -196,16 +197,17 @@ $.ajax({
 // carregar les dades necesaries per al perfil seleccionat
 $("#datosPersonales").change(function(){
   var selectedCountry = $(this).children("option:selected").val();
-  //alert("You have selected the country - " + selectedCountry);
   
   var id = selectedCountry.split('"');
-  console.log(id[1]);
+  console.log(id[1])
+  
   $.ajax({
     method: "POST",
-    url: "https://g3matriculesapp.herokuapp.com/api/reqPerfils/readOne",  // [DEBUG] - Para pruebas con HERKOU
+    url: "https://g3matriculesapp.herokuapp.com/api/reqPerfils/readOne",
     datatype: "json",
     data: ({
       id: id[1]
+      
     }),
     success: function(result){
       if(result){
@@ -213,15 +215,15 @@ $("#datosPersonales").change(function(){
         totalReq = result.data.length;
         for(i=0; i<result.data.length;i++){
           if(result.data[i].tipusReq == 0){
-            $("#buttons").append('<label for="file'+i+'">'+result.data[i].nomReq+'</label><input type="file" id="file'+i+'" name="fileImage'+i+'" accept="image/png, image/jpeg, image/jpg"><br/>');    
+            $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #606060;" id="semaf'+ i +'"></i>'+result.data[i].nomReq+'</label><br/><input type="file" id="file'+i+'" name="fileImage'+i+'" accept="image/png, image/jpeg, image/jpg"> <br/>');    
            
           }
           else if(result.data[i].tipusReq == 1){
-            $("#buttons").append('<label for="file'+i+'">'+result.data[i].nomReq+'</label><input type="file" id="file'+i+'" name="fileDoc'+i+'" accept=".pdf"><br/>');    
+            $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #606060;" id="semaf'+ i +'"></i>'+result.data[i].nomReq+'</label><br/><input type="file" id="file'+i+'" name="fileDoc'+i+'" accept=".pdf"><br/>');    
            
           }
           else if(result.data[i].tipusReq == 2){
-            $("#buttons").append('<label for="file'+i+'">'+result.data[i].nomReq+'</label><input type="text" id="file'+i+'" name="fileDoc'+i+'" ><br/>');    
+            $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #606060;" id="semaf'+ i +'"></i>'+result.data[i].nomReq+'</label><br/><input type="text" id="file'+i+'" name="fileDoc'+i+'"  ><br/>');    
            
           }
         }
@@ -357,7 +359,7 @@ function userStatus(){
       token:localStorage.getItem("TOKEN")
     }),
     success: function(result){
-      console.log(result);
+      
       if(result.result== "Validada"){
         VGreen();
       }else if(result.result== "Per_validar"){
@@ -369,6 +371,85 @@ function userStatus(){
     },
     error: function(result){
       alert('Usuario/Contraseña incorrecta...')
+    }
+  });
+}
+
+function  estadoPerfil(){
+  $.ajax({
+    method: "POST",
+    url: "https://g3matriculesapp.herokuapp.com/api/perfils/getStatusPerfil",  
+    datatype: "json",
+    data: ({
+      token: localStorage.getItem("TOKEN")
+    }),
+    success: function(result1){
+      console.log("aqui vamos")
+      console.log(result1);
+      console.log(result1.data[0].estatRequisits[0]);
+      var tempId= result1.dataPerfil[0]._id;
+      $.ajax({
+        
+        method: "POST",
+        url: "https://g3matriculesapp.herokuapp.com/api/reqPerfils/readOne",
+        datatype: "json",
+        data: ({
+          id: tempId
+        }),
+        success: function(result2){
+          if(result2){
+            $("#buttons").html("");
+            totalReq = result2.data.length;
+            // estatRequisits == 0 rojo - estatRequisits == 1 amarillo - estatRequisits == 2 verde
+            for(i=0; i<result2.data.length;i++){
+              if(result2.data[i].tipusReq == 0 && result1.data[0].estatRequisits[i] == 0 ){
+                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #EF4100;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="file" id="file'+i+'" name="fileImage'+i+'" accept="image/png, image/jpeg, image/jpg"> <br/>');    
+               
+              }else if(result2.data[i].tipusReq == 0 && result1.data[0].estatRequisits[i] == 1){
+                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #F3C700;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="file" id="file'+i+'" name="fileImage'+i+'" accept="image/png, image/jpeg, image/jpg"> <br/>');    
+
+              }
+              else if(result2.data[i].tipusReq == 0 && result1.data[0].estatRequisits[i] == 2){
+                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #0FE600;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="file" id="file'+i+'" name="fileImage'+i+'" accept="image/png, image/jpeg, image/jpg"> <br/>');    
+
+              }
+              else if(result2.data[i].tipusReq == 1 && result1.data[0].estatRequisits[i] == 0){
+                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #EF4100;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="file" id="file'+i+'" name="fileDoc'+i+'" accept=".pdf"><br/>');    
+               
+              }
+              else if(result2.data[i].tipusReq == 1 && result1.data[0].estatRequisits[i] == 1){
+                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #F3C700;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="file" id="file'+i+'" name="fileDoc'+i+'" accept=".pdf"><br/>');    
+               
+              }
+              else if(result2.data[i].tipusReq == 1 && result1.data[0].estatRequisits[i] == 2){
+                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #0FE600;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="file" id="file'+i+'" name="fileDoc'+i+'" accept=".pdf"><br/>');    
+               
+              }
+              else if(result2.data[i].tipusReq == 2 && result1.data[0].estatRequisits[i] == 0){
+                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #EF4100;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="text" id="file'+i+'" name="fileDoc'+i+'"  ><br/>');    
+               
+              }
+              else if(result2.data[i].tipusReq == 2 && result1.data[0].estatRequisits[i] == 1){
+                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #F3C700;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="text" id="file'+i+'" name="fileDoc'+i+'"  ><br/>');    
+               
+              }
+              else if(result2.data[i].tipusReq == 2 && result1.data[0].estatRequisits[i] == 2){
+                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #0FE600;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="text" id="file'+i+'" name="fileDoc'+i+'"  ><br/>');    
+               
+              }
+            }
+            $("#cPerf").css("visibility","visible");
+          }
+        }
+    
+      })
+
+
+
+
+    },
+    error: function(result2){
+      alert('Error al obtener perfil')
     }
   });
 }
