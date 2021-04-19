@@ -403,37 +403,49 @@ function  estadoPerfil(){
             // estatRequisits == 0 rojo - estatRequisits == 1 amarillo - estatRequisits == 2 verde
             for(i=0; i<result2.data.length;i++){
               if(result2.data[i].tipusReq == 0 && result1.data[0].estatRequisits[i] == 0 ){
+                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #919191;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="file" id="file'+i+'" name="fileImage'+i+'" accept="image/png, image/jpeg, image/jpg"> <br/>');    
+               
+              }
+              if(result2.data[i].tipusReq == 0 && result1.data[0].estatRequisits[i] == 1 ){
                 $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #EF4100;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="file" id="file'+i+'" name="fileImage'+i+'" accept="image/png, image/jpeg, image/jpg"> <br/>');    
                
-              }else if(result2.data[i].tipusReq == 0 && result1.data[0].estatRequisits[i] == 1){
+              }else if(result2.data[i].tipusReq == 0 && result1.data[0].estatRequisits[i] == 2){
                 $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #F3C700;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="file" id="file'+i+'" name="fileImage'+i+'" accept="image/png, image/jpeg, image/jpg"> <br/>');    
 
               }
-              else if(result2.data[i].tipusReq == 0 && result1.data[0].estatRequisits[i] == 2){
+              else if(result2.data[i].tipusReq == 0 && result1.data[0].estatRequisits[i] == 3){
                 $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #0FE600;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="file" id="file'+i+'" name="fileImage'+i+'" accept="image/png, image/jpeg, image/jpg"> <br/>');    
 
               }
               else if(result2.data[i].tipusReq == 1 && result1.data[0].estatRequisits[i] == 0){
-                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #EF4100;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="file" id="file'+i+'" name="fileDoc'+i+'" accept=".pdf"><br/>');    
+                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #919191;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="file" id="file'+i+'" name="fileDoc'+i+'" accept=".pdf"><br/>');    
                
               }
               else if(result2.data[i].tipusReq == 1 && result1.data[0].estatRequisits[i] == 1){
-                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #F3C700;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="file" id="file'+i+'" name="fileDoc'+i+'" accept=".pdf"><br/>');    
+                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #EF4100;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="file" id="file'+i+'" name="fileDoc'+i+'" accept=".pdf"><br/>');    
                
               }
               else if(result2.data[i].tipusReq == 1 && result1.data[0].estatRequisits[i] == 2){
+                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #F3C700;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="file" id="file'+i+'" name="fileDoc'+i+'" accept=".pdf"><br/>');    
+               
+              }
+              else if(result2.data[i].tipusReq == 1 && result1.data[0].estatRequisits[i] == 3){
                 $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #0FE600;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="file" id="file'+i+'" name="fileDoc'+i+'" accept=".pdf"><br/>');    
                
               }
               else if(result2.data[i].tipusReq == 2 && result1.data[0].estatRequisits[i] == 0){
-                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #EF4100;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="text" id="file'+i+'" name="fileDoc'+i+'"  ><br/>');    
+                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #919191;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="text" id="file'+i+'" name="fileDoc'+i+'"  ><br/>');    
                
               }
               else if(result2.data[i].tipusReq == 2 && result1.data[0].estatRequisits[i] == 1){
-                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #F3C700;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="text" id="file'+i+'" name="fileDoc'+i+'"  ><br/>');    
+                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #EF4100;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="text" id="file'+i+'" name="fileDoc'+i+'"  ><br/>');    
                
               }
               else if(result2.data[i].tipusReq == 2 && result1.data[0].estatRequisits[i] == 2){
+                $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #F3C700;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="text" id="file'+i+'" name="fileDoc'+i+'"  ><br/>');    
+               
+              }
+              else if(result2.data[i].tipusReq == 2 && result1.data[0].estatRequisits[i] == 3){
                 $("#buttons").append('<label for="file'+i+'"><i class="material-icons circle semaforo center-align" style="background-color: #0FE600;" id="semaf'+ i +'"></i>'+result2.data[i].nomReq+'</label><br/><input type="text" id="file'+i+'" name="fileDoc'+i+'"  ><br/>');    
                
               }
