@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ec180d1-df28-48c7-81f9-d5b1d0f86356" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/www/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/dashboard.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/js/init.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/init.js" afterDir="false" />
     </list>
@@ -110,11 +111,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1615822797628" />
-    <state x="-6" y="62" width="1291" height="624" key="AVDManager" timestamp="1618232733223">
+    <state x="-6" y="62" width="1291" height="624" key="AVDManager" timestamp="1618323127469">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-6" y="62" width="1291" height="624" key="AVDManager/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616006285410" />
-    <state x="-6" y="62" width="1291" height="624" key="AVDManager/0.0.1536.824@0.0.1536.824" timestamp="1618232733223" />
+    <state x="-6" y="62" width="1291" height="624" key="AVDManager/0.0.1536.824@0.0.1536.824" timestamp="1618323127469" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1615824546243">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

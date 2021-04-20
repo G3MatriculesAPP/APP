@@ -134,13 +134,19 @@ $.ajax({
 
   function onDeviceReady() {
       // Cordova is now initialized. Have fun!
-  
+      $(document).ready(function() {
+        
+        $(".carousel")[0].style = "height: 100vh;";
+        
+    });
+
       console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
       document.getElementById("dIncompletos").onclick = VRed;
       document.getElementById("dPorValidar").onclick = VYellow;
       document.getElementById("dAceptados").onclick = VGreen;
       document.getElementById("cPerf").onclick = subirFicheros;
       document.getElementById("bGuardar").onclick = guardarUF;
+    
       obtenerCiclo();
       datosP();
       estadoPerfil();
@@ -279,6 +285,7 @@ function datosP(){
 });
 }
 
+//   Sistema de acordeon con botones
 function obtenerCiclo(){
   $.ajax({
     method: "POST",
@@ -370,7 +377,7 @@ function userStatus(){
 
     },
     error: function(result){
-      alert('Usuario/Contraseña incorrecta...')
+      alert('Error...')
     }
   });
 }

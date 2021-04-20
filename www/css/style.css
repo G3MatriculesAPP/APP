@@ -78,3 +78,8 @@
 .checkboxer {
   overflow: scroll;
 }
+
+.fullScreen {
+  background-color: aqua;
+  height: 100%;
+}
